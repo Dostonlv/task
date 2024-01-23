@@ -1,0 +1,190 @@
+basePath: /v1
+definitions:
+  models.Blog:
+    properties:
+      content:
+        minLength: 15
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      title:
+        minLength: 3
+        type: string
+    required:
+    - content
+    - title
+    type: object
+  models.BlogList:
+    properties:
+      blogs:
+        items:
+          $ref: '#/definitions/models.Blog'
+        type: array
+      has_more:
+        type: boolean
+      page:
+        type: integer
+      size:
+        type: integer
+      total_count:
+        type: integer
+      total_pages:
+        type: integer
+    type: object
+  models.BlogSwagger:
+    properties:
+      content:
+        minLength: 15
+        type: string
+      title:
+        minLength: 3
+        type: string
+    required:
+    - content
+    - title
+    type: object
+info:
+  contact:
+    email: dostonlv@icloud.com
+    name: Doston Nematov (kei)
+    url: https://github.com/Dostonlv
+  description: Blog and News API Server.
+  title: Blog and News API.
+  version: "1.0"
+paths:
+  /blogs:
+    get:
+      consumes:
+      - application/json
+      description: Get all blogs with pagination and search
+      parameters:
+      - description: title
+        in: query
+        name: title
+        type: string
+      - description: page number
+        format: page
+        in: query
+        name: page
+        type: integer
+      - description: number of elements per page
+        format: size
+        in: query
+        name: size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BlogList'
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: GetAll
+      tags:
+      - Blogs
+    post:
+      consumes:
+      - application/json
+      description: Create blog
+      parameters:
+      - description: blog
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.BlogSwagger'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Blog'
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Create blog
+      tags:
+      - Blogs
+  /blogs/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete blog
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Delete
+      tags:
+      - Blogs
+    get:
+      consumes:
+      - application/json
+      description: Getting blog by id
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Blog'
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: GetByID
+      tags:
+      - Blogs
+    put:
+      consumes:
+      - application/json
+      description: Update blog
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.BlogSwagger'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Blog'
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Update
+      tags:
+      - Blogs
+swagger: "2.0"

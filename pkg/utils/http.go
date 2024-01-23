@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Yangiboev/todo/pkg/httpErrors"
-	"github.com/Yangiboev/todo/pkg/logger"
-	"github.com/Yangiboev/todo/pkg/sanitize"
+	"github.com/Dostonlv/task/pkg/httpErrors"
+	"github.com/Dostonlv/task/pkg/logger"
+	"github.com/Dostonlv/task/pkg/sanitize"
 	"github.com/labstack/echo/v4"
 	"github.com/pkg/errors"
 )
