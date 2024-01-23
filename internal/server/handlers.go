@@ -3,8 +3,8 @@ package server
 import (
 	"strings"
 
-	blogsHttp "github.com/Dostonlv/task/blogs/delivery/http"
 	"github.com/Dostonlv/task/docs"
+	blogsHttp "github.com/Dostonlv/task/internal/blogs/delivery/http"
 	"github.com/Dostonlv/task/internal/blogs/repository"
 	"github.com/Dostonlv/task/internal/blogs/usecase"
 	"github.com/labstack/echo/v4"
@@ -57,7 +57,7 @@ func (s *Server) MapHandlers(e *echo.Echo) error {
 	e.Use(middleware.BodyLimit(BODY_LIMIT))
 
 	v1 := s.echo.Group("/v1")
-	blogsHttp.MapHandlers(v1, blogHandlers)
+	blogsHttp.MapBlogsRoutes(v1, blogHandlers)
 
 	return nil
 }
