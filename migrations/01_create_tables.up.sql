@@ -8,7 +8,7 @@ CREATE TABLE blogs
 (
     id          UUID                       PRIMARY KEY   DEFAULT uuid_generate_v4(),
     title       VARCHAR(255)                NOT NULL    CHECK (title <> ''),
-    content     TEXT                        NOT NULL    CHECK (content <> ''),
+    content     VARCHAR(512)                NOT NULL    CHECK (content <> ''),
     created_at  TIMESTAMP WITH TIME ZONE    NOT NULL    DEFAULT CURRENT_TIMESTAMP 
 );
 
@@ -16,6 +16,6 @@ CREATE TABLE news
 (
     id          UUID                       PRIMARY KEY   DEFAULT uuid_generate_v4(),
     title       VARCHAR(255)                NOT NULL    CHECK (title <> ''),
-    content     TEXT                        NOT NULL    CHECK (content <> ''),
+    content     VARCHAR(512)                NOT NULL    CHECK (content <> ''),
     created_at  TIMESTAMP WITH TIME ZONE    NOT NULL    DEFAULT CURRENT_TIMESTAMP 
 );
